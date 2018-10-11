@@ -92,7 +92,6 @@ pushl %edi
 .section .data
 	.global op1
 	.global op2
-	.global res
 
 
 
@@ -103,9 +102,12 @@ pushl %edi
 
 
 sum:
-	# prologue
+	
+	# Prologue
+	########################################
 	pushl %ebp # save previous stack frame pointer
 	movl %esp, %ebp # the stack frame pointer for sum function
+	########################################
 
 
 
@@ -116,22 +118,22 @@ sum:
 	movl op2, %eax #place op2 in eax
 	addl %ecx, %eax #add ecx to eax. Result is in eax
 
-	movl %eax, res # copy the result to res
 
 
 
 
 
 
-	# epilogue
+	# Epilogue
+    ########################################
 	movl %ebp, %esp # restore the previous stack pointer ("clear" the stack)
 	popl %ebp # restore the previous stack frame pointer
+	########################################
+
+
+
+
 	ret
-
-
-
-
-
 
 
 

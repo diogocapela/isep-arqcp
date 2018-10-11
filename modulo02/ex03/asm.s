@@ -66,10 +66,7 @@
 #   l - 32 bits
 
 
-
-
 ##################################################################################################################################
-
 
 
 # Save Registers
@@ -83,7 +80,6 @@ pushl %edi
 
 # Clean Registers:
 
-
 # TODO
 
 
@@ -92,48 +88,42 @@ pushl %edi
 .section .data
 	.global op1
 	.global op2
-	.global res
-
+	.global op3
+	.global op4
 
 
 
 .section .text # section identifier : code
-	.global sum # void sum(void)
+	.global makeOperation # int makeOperation(void)
 
 
 
-sum:
-	# prologue
+makeOperation:
+	
+	# Prologue
+	########################################
 	pushl %ebp # save previous stack frame pointer
 	movl %esp, %ebp # the stack frame pointer for sum function
+	########################################
+
+
+
+	movl op4, %eax # place op4 in eax
+	addl op3, %eax # adds op3 to eax and places it on eax
+	subl op2, %eax # substracts op2 from eax
+	addl op1, %eax # adds op1 to eax and places it on eax
 
 
 
 
-
-
-	movl op1, %ecx #place op1 in ecx
-	movl op2, %eax #place op2 in eax
-	addl %ecx, %eax #add ecx to eax. Result is in eax
-
-	movl %eax, res # copy the result to res
-
-
-
-
-
-
-	# epilogue
+	# Epilogue
+    ########################################
 	movl %ebp, %esp # restore the previous stack pointer ("clear" the stack)
 	popl %ebp # restore the previous stack frame pointer
+	########################################
+
+
 	ret
-
-
-
-
-
-
-
 
 
 # Restore Regsiters
@@ -142,6 +132,5 @@ popl %edi
 popl %esi
 popl %ebx
 ######################################################
-
 
 
