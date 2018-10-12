@@ -3,11 +3,12 @@
 void compress_shorts(short* shorts, int n_shorts, int* integers)
 {
 	int i;
-	int numb_of_ints = n_shorts / 2;
+	int ratio = sizeof(int) / sizeof(short);
+	int numb_of_ints = n_shorts / ratio;
 
 	for(i = 0; i < numb_of_ints; i++)
 	{
-		*(integers + i) = *((int*) (shorts + (2*i)));
+		*(integers + i) = *((int*) (shorts + (ratio * i)));
 		//printf("%d\n", *(integers + i));
 	}
 }
