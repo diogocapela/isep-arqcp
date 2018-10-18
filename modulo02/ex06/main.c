@@ -3,24 +3,25 @@
 
 
 
-short variableToSwap = 0x00ff;
+char first2Bytes = 0xbb;
+char second2Bytes = 0xcc;
 
 int main(void) {
 
-	printf("Short variable to swap:");
+	/*
+	printf("first2Bytes: ");
 
-	// TODO: Pq é q se for eu a inserir a variavel com o scanf não funciona?
+	scanf(" %c", &first2Bytes);
 
-	scanf("%x", &variableToSwap);
+	printf("second2Bytes ");
+
+	scanf(" %c", &second2Bytes);
+	*/
 	
-	int resultado = swapBytes();
 
-	printf("swapBytes() = 0x%x\n", resultado);
+	short resultadoConcat = concatBytes();
 
-	printf("Print signed 16bits variables: %hd\n", resultado);
-
-	printf("Print unsigned 16bits variables: %hu\n", resultado);
-
+	printf("concatBytes() = 0x%hx\n", resultadoConcat);
 
 	return 0;
 

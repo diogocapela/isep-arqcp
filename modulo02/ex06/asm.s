@@ -31,8 +31,8 @@
 
 # Registers:
 #
-# 				  EAX
-#					 		AX							  ESI
+# 				  EAX (4bytes)
+#					 		AX (2bytes)					  ESI
 #				 	   AH		AL                                      SI
 # ######## ######## ######## ########     ######## ######## ######## ########
 #
@@ -64,6 +64,11 @@
 #   b - 8 bits
 #   w - 16 bits
 #   l - 32 bits
+
+
+
+# EM HEXADECIMAL DUAS LETRAS SAO 2 BYTES  - ALERTTTTT : http://calc.50x.eu/
+
 
 
 # Bitwise Operations:
@@ -123,16 +128,17 @@ pushl %edi
 .section .data
 
 	# Global Variables
-	.global variableToSwap
+	.global first2Bytes
+	.global second2Bytes
 
 
 .section .text # section identifier : code
 
-	.global swapBytes
+	.global concatBytes
 
 
 
-swapBytes:
+concatBytes:
 	
 	# Prologue
 	########################################
@@ -140,13 +146,9 @@ swapBytes:
 	movl %esp, %ebp # the stack frame pointer for sum function
 	########################################
 
-	movl	$0x00000000,			%eax				
-	movw	variableToSwap,		%ax # move variableToSwap to  eax
-	notw	%ax 					 # preform bitwise NOT on eax
-
-
-
-
+	movl	$0,			%eax	 # clear eax			
+	movb	first2Bytes,		%al # move first2Bytes to  ah
+	movb	second2Bytes,		%ah # move second2Bytes to  al
 
 	# Epilogue
     ########################################
