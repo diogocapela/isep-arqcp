@@ -1,17 +1,31 @@
-main: main.o asm.o
-	gcc -Wall -g main.o asm.o -o main
+# exemplo de makefile com variaveis
+# variaveis
+INCLUDES = asm.h
+SOURCES = asm.s main.c
+OBJFILES = asm.o main.o
+EXEC = main
 
-main.o: main.c asm.h
-	gcc -Wall -g -c main.c
+# regras de sufixo
+.SUFFIXES : .c .o
+.SUFFIXES : .s .o
+# como transformar um .c num .o ; $< -- nome do ficheiro
+.c.o:
+	gcc -Wall -g -c $<
+# como transformar um .s num .o ; $< -- nome do ficheiro
+.s.o:
+	gcc -Wall -g -c $<	
+	
+${EXEC}: ${OBJFILES}
+	gcc -Wall -g -o ${EXEC} ${OBJFILES}
+	
+${OBJFILES}: ${SOURCES} ${INCLUDES}
 
-asm.o: asm.s
-	gcc -Wall -g -c asm.s
-
-run: main
-	./main
-
+run: ${EXEC}
+	./${EXEC}
+	
 clean:
-	rm *.o main
-
-debug:
-	ddd main
+	rm -f ${OBJFILES} ${EXEC}
+	
+#debug	
+debug: ${EXEC}
+	ddd ${EXEC} &	
